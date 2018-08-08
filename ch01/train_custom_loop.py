@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # 2. load data and generate model and optimizer
     x, t = spiral.load_data()
     model = TwoLayerNet(input_size=2, hidden_size=hidden_size, output_size=3)
-    optimizer =SGD(lr=learning_rate)
+    optimizer = SGD(lr=learning_rate)
 
     # variables for learning
     data_size = len(x)
