@@ -10,9 +10,9 @@ class TwoLayerNet:
 
         # initialize weight and bias
         W1 = 0.01 * np.random.randn(I, H)
-        b1 = np.zeros_like(H)
+        b1 = np.zeros(H)
         W2 = 0.01 * np.random.randn(H, O)
-        b2 = np.zeros_like(O)
+        b2 = np.zeros(O)
 
         # create layer
         self.layers = [
