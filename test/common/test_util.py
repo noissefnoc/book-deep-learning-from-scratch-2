@@ -3,7 +3,7 @@
 import unittest
 import numpy as np
 import numpy.testing as npt
-from common.util import preprocess
+from common.util import preprocess, create_co_matrix
 
 
 class TestUtil(unittest.TestCase):
@@ -43,3 +43,23 @@ class TestUtil(unittest.TestCase):
         self.assertDictEqual(
             actual_id_to_word,
             expected_id_to_word)
+
+
+    # 2.3.4 cooccurrence matrix
+    def test_create_co_matrix(self):
+        corpus, _, _ = preprocess('You say goodbye and I say hello.')
+        vocab_size = np.unique(corpus).size
+
+        expected = np.array([
+           [0, 1, 0, 0, 0, 0, 0],
+           [1, 0, 1, 0, 1, 1, 0],
+           [0, 1, 0, 1, 0, 0, 0],
+           [0, 0, 1, 0, 1, 0, 0],
+           [0, 1, 0, 1, 0, 0, 0],
+           [0, 1, 0, 0, 0, 0, 1],
+           [0, 0, 0, 0, 0, 1, 0],
+        ], dtype=np.int32)
+
+        actual = create_co_matrix(corpus, vocab_size)
+
+        npt.assert_array_equal(actual, expected)
