@@ -56,3 +56,11 @@ def create_co_matrix(corpus, vocab_size, window_size=1):
                 co_matrix[word_id, right_word_id] += 1
 
     return co_matrix
+
+
+# 2.3.5 vector similarity
+def cos_similarity(x, y, eps=1e-8):
+    # adds tiny value for preventing divide by zero
+    nx = x / (np.sqrt(np.sum(x ** 2)) + eps)
+    ny = y / (np.sqrt(np.sum(y ** 2)) + eps)
+    return np.dot(nx, ny)

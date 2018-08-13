@@ -3,7 +3,7 @@
 import unittest
 import numpy as np
 import numpy.testing as npt
-from common.util import preprocess, create_co_matrix
+from common.util import preprocess, create_co_matrix, cos_similarity
 
 
 class TestUtil(unittest.TestCase):
@@ -44,7 +44,6 @@ class TestUtil(unittest.TestCase):
             actual_id_to_word,
             expected_id_to_word)
 
-
     # 2.3.4 cooccurrence matrix
     def test_create_co_matrix(self):
         corpus, _, _ = preprocess('You say goodbye and I say hello.')
@@ -63,3 +62,13 @@ class TestUtil(unittest.TestCase):
         actual = create_co_matrix(corpus, vocab_size)
 
         npt.assert_array_equal(actual, expected)
+
+    # 2.3.5 vector similarity
+    def test_cos_similarity(self):
+        input_x = [np.array([0, 0]), np.array([3, 3, 3, 3])]
+        input_y = [np.array([0, 0]), np.array([4, 4, 4, 4])]
+        expected = [0, 1]
+
+        for i in range(len(input_x)):
+            actual = cos_similarity(input_x[i], input_y[i])
+            self.assertAlmostEqual(actual, expected[i])
