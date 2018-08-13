@@ -48,7 +48,7 @@ class Trainer:
                 # calculate grad and update parameters
                 loss = model.forward(batch_x, batch_t)
                 model.backward()
-                params, grads = remove_duplicate(model.params, model, grads)
+                params, grads = remove_duplicate(model.params, model.grads)
 
                 if max_grad is not None:
                     clip_grads(grads, max_grad)
