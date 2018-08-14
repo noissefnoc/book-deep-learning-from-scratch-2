@@ -76,7 +76,9 @@ if __name__ == '__main__':
         :param data_type: data type: 'train', 'test' or 'valid(val)'
         :return:
         """
-        if data_type == 'val': data_type = 'valid'
+        if data_type == 'val':
+            data_type = 'valid'
+
         save_path = dataset_dir + '/' + save_file[data_type]
 
         word_to_id, id_to_word = load_vocab()
@@ -94,6 +96,7 @@ if __name__ == '__main__':
 
         np.save(save_path, corpus)
         return corpus, word_to_id, id_to_word
+
 
 if __name__ == '__main__':
     for data_type in ('train', 'val', 'test'):
