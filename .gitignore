@@ -6,3 +6,6 @@ venv/
 
 # pycache
 */__pycache__
+
+# dataset
+dataset/ptb.*.*
