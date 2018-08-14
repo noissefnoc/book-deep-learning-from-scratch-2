@@ -29,7 +29,7 @@ class SimpleCBOW:
         # set word vector into member variable
         self.word_vecs = W_in
 
-    def foward(self, contexts, target):
+    def forward(self, contexts, target):
         h0 = self.in_layer_0.forward(contexts[:, 0])
         h1 = self.in_layer_1.forward(contexts[:, 1])
         h = (h0 + h1) * 0.5
