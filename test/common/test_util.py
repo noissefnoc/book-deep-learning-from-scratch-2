@@ -3,7 +3,7 @@
 import unittest
 import numpy as np
 import numpy.testing as npt
-from common.util import preprocess, create_co_matrix, cos_similarity
+from common.util import preprocess, create_co_matrix, cos_similarity, create_contexts_target
 
 
 class TestUtil(unittest.TestCase):
@@ -72,3 +72,15 @@ class TestUtil(unittest.TestCase):
         for i in range(len(input_x)):
             actual = cos_similarity(input_x[i], input_y[i])
             self.assertAlmostEqual(actual, expected[i])
+
+    # 3.3.1 contexts and target
+    def test_create_contexts_target(self):
+        text = 'You say goodbye and I say hello.'
+        corpus, word_to_id, id_to_word = preprocess(text)
+        contexts, target = create_contexts_target(corpus, window_size=1)
+
+        expected_contexts = np.array([[0, 2], [1, 3], [2, 4], [3, 1], [4, 5], [1, 6]])
+        expected_target = np.array([1, 2, 3, 4, 1, 5])
+
+        npt.assert_array_equal(contexts, expected_contexts)
+        npt.assert_array_equal(target, expected_target)
