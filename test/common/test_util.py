@@ -3,7 +3,7 @@
 import unittest
 import numpy as np
 import numpy.testing as npt
-from common.util import preprocess, create_co_matrix, cos_similarity, create_contexts_target
+from common.util import preprocess, create_co_matrix, cos_similarity, create_contexts_target, convert_one_hot
 
 
 class TestUtil(unittest.TestCase):
@@ -84,3 +84,48 @@ class TestUtil(unittest.TestCase):
 
         npt.assert_array_equal(contexts, expected_contexts)
         npt.assert_array_equal(target, expected_target)
+
+    # 3.3.2 convert to one-hot vector
+    def test_convert_one_hot(self):
+        text = 'You say goodbye and I say hello.'
+        corpus, word_to_id, id_to_word = preprocess(text)
+        contexts, target = create_contexts_target(corpus, window_size=1)
+        vocab_size = len(word_to_id)
+        target = convert_one_hot(target, vocab_size)
+        contexts = convert_one_hot(contexts, vocab_size)
+
+        expected_target = np.array([
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0]])
+        expected_contexts = np.array([
+            [
+                [1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0]
+            ],
+            [
+                [0, 1, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0]
+            ],
+            [
+                [0, 0, 1, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 0, 0]
+            ],
+            [
+                [0, 0, 0, 1, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0, 0]
+            ],
+            [
+                [0, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0, 1, 0]
+            ],
+            [
+                [0, 1, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 1]
+            ]])
+
+        npt.assert_array_equal(target, expected_target)
+        npt.assert_array_equal(contexts, expected_contexts)
