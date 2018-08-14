@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
 
     def _download(file_name):
-        file_path = dataset_dir + '/' + file_name
+        file_path = os.path.join(dataset_dir, file_name)
 
         if os.path.exists(file_path):
             return
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
 
     def load_vocab():
-        vocab_path = dataset_dir + '/' + vocab_file
+        vocab_path = os.path.join(dataset_dir, vocab_file)
 
         if os.path.exists(vocab_path):
             with open(vocab_path, 'rb') as f:
@@ -53,7 +53,7 @@ if __name__ == '__main__':
         id_to_word = {}
         data_type = 'train'
         file_name = key_file[data_type]
-        file_path = dataset_dir + '/' + file_name
+        file_path = os.path.join(dataset_dir, file_name)
 
         _download(file_name)
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         if data_type == 'val':
             data_type = 'valid'
 
-        save_path = dataset_dir + '/' + save_file[data_type]
+        save_path = os.path.join(dataset_dir, save_file[data_type])
 
         word_to_id, id_to_word = load_vocab()
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
             return corpus, word_to_id, id_to_word
 
         file_name = key_file[data_type]
-        file_path = dataset_dir + '/' + file_name
+        file_path = os.path.join(dataset_dir, file_name)
         _download(file_name)
 
         words = open(file_path).read().replace('\n', '<eos>').strip().split()
