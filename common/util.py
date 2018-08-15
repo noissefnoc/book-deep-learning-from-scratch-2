@@ -169,3 +169,12 @@ def convert_one_hot(corpus, vocab_size):
                 one_hot[idx_0, idx_1, word_id] = 1
 
     return one_hot
+
+
+# 4.3.2 CBOW model training code
+def to_cpu(x):
+    import numpy
+    if type(x) == numpy.ndarray:
+        return x
+
+    return np.asnumpy(x)
