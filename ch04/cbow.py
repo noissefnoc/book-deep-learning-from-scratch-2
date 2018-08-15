@@ -28,7 +28,7 @@ class CBOW:
 
         for layer in layers:
             self.params += layer.params
-            self.grads += layers.grads
+            self.grads += layer.grads
 
         # set word vector to member variable
         self.word_vecs = W_in
