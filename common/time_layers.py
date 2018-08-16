@@ -190,7 +190,7 @@ class TimeSoftmaxWithLoss:
         loss = -np.sum(ls)
         loss /= mask.sum()
 
-        self.cache = (ts, ys, mask (N, T, V))
+        self.cache = (ts, ys, mask, (N, T, V))
         return loss
 
     def backowrd(self, dout=1):
