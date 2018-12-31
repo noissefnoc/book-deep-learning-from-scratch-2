@@ -11,8 +11,8 @@ if __name__ == '__main__':
     # hyper parameters settings
     batch_size = 10
     wordvec_size = 100
-    hidden_size = 100 # number of RNN hidden layer vector elements
-    time_size = 5 # size of Truncated BPTT expansion
+    hidden_size = 100  # number of RNN hidden layer vector elements
+    time_size = 5      # size of Truncated BPTT expansion
     lr = 0.1
     max_epoch = 100
 
@@ -22,8 +22,8 @@ if __name__ == '__main__':
     corpus = corpus[:corpus_size]
     vocab_size = int(max(corpus) + 1)
 
-    xs = corpus[:-1] # input
-    ts = corpus[1:]  # output (teaching label)
+    xs = corpus[:-1]  # input
+    ts = corpus[1:]   # output (teaching label)
     data_size = len(xs)
     print('corpus size: %d, vocabulary size: %d' % (corpus_size, vocab_size))
 
